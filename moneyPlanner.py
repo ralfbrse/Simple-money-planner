@@ -1,54 +1,64 @@
-
-from ctypes import sizeof
 from moneyUser import *
 import json
-from types import SimpleNamespace
+
+def main():
 
 
-print("Choose a user: ")
+    with open("data.json", "r") as file:
+        data = json.load(file)
 
-with open("data.json", "r") as dataSer:
-    data = json.load(dataSer)
-
-user_enum = enumerate(data["Users"].keys(), start=1)
-user_list = {}
-print("0. Add new user")
-for index, name in user_enum:
-    user_list[index] =  name
-    print("{}. {}".format(index, name))
-
-# FIXME make user selections work
-user_select = -1
-
-while user_select == -1:
     
-    user_select =int(input())
-    if user_select > 0 and user_select <= len(data["Users"]):
-        user = User()
-        user.load_user(data["Users"][user_list[user_select]])
-    # and load data from json into py object to work with
-    elif user_select == 0:
-        new_name = input("Enter your name: ")
-        user = User(name = new_name)
-    else:
-        print("Select a valid option")
-        user_select = -1 
+    user_list = {}
+    #User menu
+    print("Choose a user: ")
+    print("0. Add new user")
+    for index, name in enumerate(data["Users"].keys(), start=1):
+        user_list[index] =  name
+        print("{}. {}".format(index, name))
 
-print(user.name)
+    #USER SELECT
 
-# make a menu
-# have view last calc
-# edit this month
-# new calc
-# switch user
-# quit
+    user_select = -1
+    while user_select < 0:
 
 
-weeks = int(input('How many weeks are you scheduled for this month: '))
+        user_select = int(input()) 
 
-for x in range(weeks):
-    user.set_hours(x+1, float(input('Enter hours for week {}: '.format(x+1))))
 
-user.projection()
+        if user_select > 0 and user_select <= len(data["Users"]): #Choose pre existing user
+            user = User() #Instansiate blank user object
+            user.load_user(data["Users"][user_list[user_select]]) #overright user with saved data
+        
+        elif user_select == 0: #Make new user
+            new_name = input("Enter your name: ")
+            user = User(name = new_name)
 
-user.save()
+        else:
+            print("Selection invalid. Try again.")
+            user_select = -1 
+
+    # make a menu
+    
+
+    # have view last calc
+    # edit this month
+    # new calc
+    # switch user
+    # quit
+
+
+    weeks = int(input('How many weeks are you scheduled for this month: '))
+
+    for x in range(weeks):
+        user.set_hours(x+1, float(input('Enter hours for week {}: '.format(x+1))))
+
+    user.projection()
+
+    user.save_user()
+
+
+
+
+
+if __name__ == '__main__':
+    main()

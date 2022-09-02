@@ -1,12 +1,10 @@
-from fileinput import close
 import json
-import string
 
 
 class User:
     
     
-    def __init__(self, name = "Default", hourly_pay = 15.0, post_tax_percent = .846) -> None:
+    def __init__(self, name = "Default", hourly_pay = 0, post_tax_percent = .846) -> None:
         
         self.name = name
         self.rate = hourly_pay
@@ -15,9 +13,6 @@ class User:
         self.last_calculated_total = 0
         return
     
-    def load_user(self, dict1):
-        self.__dict__.update(dict1)
-        return
     
     def set_hours(self, week, hours_working):
         self.hours[week] = hours_working
@@ -27,12 +22,16 @@ class User:
         self.rate = pay
         return
     
-    def save(self):
+    def save_user(self):
         with open("data.json", "r+") as outfile:
             data = json.load(outfile)
             data["Users"][self.name] = self.__dict__
             outfile.seek(0)
             json.dump(data, outfile, indent=4)
+        return
+
+    def load_user(self, dict1):
+        self.__dict__.update(dict1)
         return
             
     def projection(self):
