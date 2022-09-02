@@ -1,3 +1,4 @@
+from nis import match
 from moneyUser import *
 import json
 
@@ -22,7 +23,7 @@ def main():
     while user_select < 0:
 
 
-        user_select = int(input()) 
+        user_select = int(input('-')) 
 
 
         if user_select > 0 and user_select <= len(data["Users"]): #Choose pre existing user
@@ -39,22 +40,43 @@ def main():
 
     # make a menu
     
+    options = ['edit user', 'calculate this month', 'view user', 'switch user', 'delete user', 'quit']
+    for index, option in enumerate(options, 1):
+        print("{}. {}".format(index, option))
 
-    # have view last calc
-    # edit this month
-    # new calc
+    selection = int(input('-'))
+
+
+    #flow
+    match selection:
+        case 1:
+            print('Edit...')
+
+        case 2:
+            print('calculate')
+
+        case 3:
+            print('view...')
+
+        case 4:
+            print('switch...')
+        case 5:
+            print('delete...')
+
+        case 6:
+            print('Goodbye...')
+
+    # edit user - [pay, tax rate]
+    # make new calculation this month
+    # view last calc
     # switch user
     # quit
 
 
-    weeks = int(input('How many weeks are you scheduled for this month: '))
+    # user.save_user()
 
-    for x in range(weeks):
-        user.set_hours(x+1, float(input('Enter hours for week {}: '.format(x+1))))
-
-    user.projection()
-
-    user.save_user()
+    #put everything into a game loop
+    
 
 
 
