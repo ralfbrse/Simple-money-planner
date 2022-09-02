@@ -16,6 +16,16 @@
                 "1": 1.0
             },
             "last_calculated_total": 12.69
+        },
+        "Brian": {
+            "name": "Brian",
+            "rate": 15.0,
+            "take_home": 0.846,
+            "hours": {
+                "1": 5.0,
+                "2": 10.0
+            },
+            "last_calculated_total": 190.35
         }
     }
 }
