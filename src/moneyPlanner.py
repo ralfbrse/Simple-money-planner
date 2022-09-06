@@ -1,18 +1,19 @@
-from menus import *
-from moneyUser import *
+from src import menus
+
 
 def main():
     #USER SELECT
 
-    user = Menu.user_select()
-    if user == None:
-        print("Goodbye...")
-        return
+    user = menus.Menu.user_select()
+    
     # make a menu
     while True:
+        if user == None:
+            print("Goodbye...")
+            return
         print()
         print("Current user: {}".format(user.get_name()))
-        selection = Menu.main_menu()
+        selection = menus.Menu.main_menu()
     #flow
         
         match selection:
@@ -45,12 +46,12 @@ def main():
                 print()
 
             case 5:
-                user = Menu.user_select()
+                user = menus.Menu.user_select()
             case 6:
                 sel = input("Permenantly delete user? [y/n]: ")
                 if sel == 'y':
                     user.delete_user()
-                    user = Menu.user_select()
+                    user = menus.Menu.user_select()
                 elif sel == 'n':
                     print("Operation cancelled...")
                 else:
@@ -59,6 +60,3 @@ def main():
             case 7:
                 print('Goodbye...')
                 break
-
-if __name__ == '__main__':
-    main()

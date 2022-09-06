@@ -1,12 +1,12 @@
 import json
-from moneyUser import *
+from src import moneyUser
 
 
 class Menu:
 
     def user_select():
 
-        with open("data.json", "r") as file:
+        with open("src/data.json", "r") as file:
             data = json.load(file)
 
     
@@ -32,13 +32,13 @@ class Menu:
                 return None
             #Select existing user
             if sel > 0 and sel <= len(data["Users"]): #Choose pre existing user
-                user = User() #Instansiate blank user object
+                user = moneyUser.User() #Instansiate blank user object
                 user.load_user(data["Users"][user_list[sel]]) #overright user with saved data
             
             #Make new user
             elif sel == 0: #Make new user
                 new_name = input("Enter your name: ")
-                user = User(name = new_name)
+                user = moneyUser.User(name = new_name)
                 user.set_pay()
                 user.save_user()
                 

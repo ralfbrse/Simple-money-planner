@@ -2,8 +2,6 @@ import json
 
 
 class User:
-    
-    
     def __init__(self, name = "Default", hourly_pay = 0, post_tax_percent = .846) -> None:
         
         self.name = name
@@ -51,18 +49,18 @@ class User:
         return 'Your projected income is ${:.2f} this month'.format(self.get_last_calculated_total())
     
     def save_user(self):
-        with open("data.json", "r") as r:
+        with open("src/data.json", "r") as r:
             data = json.load(r)
         data["Users"][self.name] = self.__dict__
-        with open("data.json", "w") as w:
+        with open("src/data.json", "w") as w:
             json.dump(data, w, indent=4)
         return
 
     def delete_user(self):
-        with open("data.json", "r") as r:
+        with open("src/data.json", "r") as r:
             data = json.load(r)
         data["Users"].pop(self.name)
-        with open("data.json", "w") as w:
+        with open("src/data.json", "w") as w:
             json.dump(data, w, indent=4)
         return
         
