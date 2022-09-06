@@ -13,10 +13,16 @@ class User:
         self.last_calculated_total = 0.0
         return
     
-    
+    def get_name(self):
+        return self.name
+
     def set_hours(self):
         weeks = int(input('How many weeks are you scheduled for this month: '))        
+        if weeks > 5:
+            print("That cant be right...")
+            return
         self.hours = {}
+        
 
         for x in range(weeks):
             self.hours[x+1] = float(input('Enter hours for week {}: '.format(x+1)))
@@ -52,9 +58,14 @@ class User:
             json.dump(data, w, indent=4)
         return
 
-    # def delete_user(self):
-    #     #FIXME
-    #     return
+    def delete_user(self):
+        with open("data.json", "r") as r:
+            data = json.load(r)
+        data["Users"].pop(self.name)
+        with open("data.json", "w") as w:
+            json.dump(data, w, indent=4)
+        return
+        
 
     def load_user(self, dict1):
         self.__dict__.update(dict1)

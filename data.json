@@ -1,13 +1,3 @@
 {
-    "Users": {
-        "Tom": {
-            "name": "Tom",
-            "rate": 19,
-            "take_home": 0.846,
-            "hours": {
-                "1": 1.0
-            },
-            "last_calculated_total": 16.073999999999998
-        }
-    }
+    "Users": {}
 }
