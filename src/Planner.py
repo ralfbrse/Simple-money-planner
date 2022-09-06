@@ -1,10 +1,10 @@
-from src import menus
+from . import app_UI
 
 
 def main():
     #USER SELECT
 
-    user = menus.Menu.user_select()
+    user = app_UI.Menu.user_select()
     
     # make a menu
     while True:
@@ -13,7 +13,7 @@ def main():
             return
         print()
         print("Current user: {}".format(user.get_name()))
-        selection = menus.Menu.main_menu()
+        selection = app_UI.Menu.main_menu()
     #flow
         
         match selection:
@@ -46,12 +46,12 @@ def main():
                 print()
 
             case 5:
-                user = menus.Menu.user_select()
+                user = app_UI.Menu.user_select()
             case 6:
                 sel = input("Permenantly delete user? [y/n]: ")
                 if sel == 'y':
                     user.delete_user()
-                    user = menus.Menu.user_select()
+                    user = app_UI.Menu.user_select()
                 elif sel == 'n':
                     print("Operation cancelled...")
                 else:

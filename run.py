@@ -1,4 +1,4 @@
-from src import moneyPlanner
+from . import Planner
 
 if __name__ == '__main__':
-    moneyPlanner.main()
+    Planner.main()
