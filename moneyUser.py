@@ -10,12 +10,13 @@ class User:
         self.rate = hourly_pay
         self.take_home = post_tax_percent
         self.hours = {}
-        self.last_calculated_total = 0
+        self.last_calculated_total = 0.0
         return
     
     
     def set_hours(self):
-        weeks = int(input('How many weeks are you scheduled for this month: '))
+        weeks = int(input('How many weeks are you scheduled for this month: '))        
+        self.hours = {}
 
         for x in range(weeks):
             self.hours[x+1] = float(input('Enter hours for week {}: '.format(x+1)))
@@ -25,14 +26,30 @@ class User:
     def set_pay(self):
         pay = int(input('Input new pay rate: '))
         self.rate = pay
+        self.projection()
         return
+
+    def get_hours(self):
+        return "Hours {}".format(self.hours)
+
+    def get_pay(self):
+        return "Hourly pay: ${}".format(self.rate)
+
+    def get_last_calculated_total(self):
+        return self.last_calculated_total
+
+    def projection(self):
+        hours = sum(self.hours.values())
+        total_income = hours * self.rate * self.take_home
+        self.last_calculated_total = total_income
+        return 'Your projected income is ${:.2f} this month'.format(self.get_last_calculated_total())
     
     def save_user(self):
-        with open("data.json", "r+") as outfile:
-            data = json.load(outfile)
-            data["Users"][self.name] = self.__dict__
-            outfile.seek(0)
-            json.dump(data, outfile, indent=4)
+        with open("data.json", "r") as r:
+            data = json.load(r)
+        data["Users"][self.name] = self.__dict__
+        with open("data.json", "w") as w:
+            json.dump(data, w, indent=4)
         return
 
     # def delete_user(self):
@@ -43,9 +60,4 @@ class User:
         self.__dict__.update(dict1)
         return
             
-    def projection(self):
-        hours = sum(self.hours.values())
-        total_income = hours * self.rate * self.take_home
-        self.last_calculated_total = total_income
-        print('Your projected income is ${:.2f} this month'.format(total_income))
-        return
+    
