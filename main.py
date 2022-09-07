@@ -1,4 +1,4 @@
-from . import app_UI
+from src import app_UI
 
 
 def main():
@@ -60,3 +60,6 @@ def main():
             case 7:
                 print('Goodbye...')
                 break
+
+if __name__ == "__main__":
+    main()
