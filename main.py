@@ -1,11 +1,12 @@
 from src import app_UI
+import os
 
 
 def main():
-    #USER SELECT
+    # USER SELECT
 
     user = app_UI.Menu.user_select()
-    
+
     # make a menu
     while True:
         if user == None:
@@ -14,23 +15,24 @@ def main():
         print()
         print("Current user: {}".format(user.get_name()))
         selection = app_UI.Menu.main_menu()
-    #flow
-        
+    # flow
+
         match selection:
             case 1:
                 user.set_hours()
                 print()
                 while True:
-                    save_user = input("Would you like to save your changes? [y/n]: ")
+                    save_user = input(
+                        "Would you like to save your changes? [y/n]: ")
                     if save_user == 'y':
                         user.save_user()
                         break
-                    elif save_user =='n':
+                    elif save_user == 'n':
                         print("Discarding...")
                         break
                     else:
                         print('Enter valid input.')
-                
+
             case 2:
                 user.set_pay()
                 print()
@@ -58,8 +60,11 @@ def main():
                     print("Select valid option")
 
             case 7:
+                os.system("clear")
+            case 8:
                 print('Goodbye...')
                 break
+
 
 if __name__ == "__main__":
     main()
