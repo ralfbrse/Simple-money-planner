@@ -2,10 +2,15 @@
     "Users": {
         "Beans": {
             "name": "Beans",
-            "rate": 13,
+            "rate": 19,
             "take_home": 0.846,
-            "hours": {},
-            "last_calculated_total": 0.0
+            "hours": {
+                "1": 32.0,
+                "2": 32.0,
+                "3": 32.0,
+                "4": 32.0
+            },
+            "last_calculated_total": 2057.4719999999998
         }
     }
 }
